@@ -162,9 +162,11 @@ const ImaPlugin = function(player, options) {
    *     blank to use the existing content.
    * @param {?string} adTag The ad tag to be requested when the content loads.
    *     Leave blank to use the existing ad tag.
+   * @param {?boolean} playOnLoad True to play the content once it has loaded,
+   *     false to only load the content but not start playback.
    */
-  this.setContentWithAdTag = function(contentSrc, adTag) {
-    this.controller.setContentWithAdTag(contentSrc, adTag);
+  this.setContentWithAdTag = function(contentSrc, adTag, playOnLoad) {
+    this.controller.setContentWithAdTag(contentSrc, adTag, playOnLoad);
   }.bind(this);
 
 
@@ -176,12 +178,15 @@ const ImaPlugin = function(player, options) {
    *     blank to use the existing content.
    * @param {?string} adsResponse The ads response to be requested when the
    *     content loads. Leave blank to use the existing ads response.
+   * @param {?boolean} playOnLoad True to play the content once it has loaded,
+   *     false to only load the content but not start playback.
    */
   this.setContentWithAdsResponse =
-      function(contentSrc, adsResponse) {
+      function(contentSrc, adsResponse, playOnLoad) {
     this.controller.setContentWithAdsResponse(
-        contentSrc, adsResponse);
+        contentSrc, adsResponse, playOnLoad);
   }.bind(this);
+
 
   /**
    * Sets the content of the video player. You should use this method instead
@@ -191,11 +196,13 @@ const ImaPlugin = function(player, options) {
    *     blank to use the existing content.
    * @param {?Object} adsRequest The ads request to be requested when the
    *     content loads. Leave blank to use the existing ads request.
+   * @param {?boolean} playOnLoad True to play the content once it has loaded,
+   *     false to only load the content but not start playback.
    */
   this.setContentWithAdsRequest =
-      function(contentSrc, adsRequest) {
+      function(contentSrc, adsRequest, playOnLoad) {
     this.controller.setContentWithAdsRequest(
-        contentSrc, adsRequest);
+        contentSrc, adsRequest, playOnLoad);
   }.bind(this);
 
 
@@ -217,5 +224,3 @@ const init = function(options) {
 
 const registerPlugin = videojs.registerPlugin || videojs.plugin;
 registerPlugin('ima', init);
-
-export default ImaPlugin;

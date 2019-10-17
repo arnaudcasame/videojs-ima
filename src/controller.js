@@ -535,12 +535,14 @@ Controller.prototype.onPlayerVolumeChanged = function(volume) {
  *     blank to use the existing content.
  * @param {?string} adTag The ad tag to be requested when the content loads.
  *     Leave blank to use the existing ad tag.
+ * @param {?boolean} playOnLoad True to play the content once it has loaded,
+ *     false to only load the content but not start playback.
  */
 Controller.prototype.setContentWithAdTag =
-    function(contentSrc, adTag) {
+    function(contentSrc, adTag, playOnLoad) {
   this.reset();
   this.settings.adTagUrl = adTag ? adTag : this.settings.adTagUrl;
-  this.playerWrapper.changeSource(contentSrc);
+  this.playerWrapper.changeSource(contentSrc, playOnLoad);
 };
 
 
@@ -552,13 +554,15 @@ Controller.prototype.setContentWithAdTag =
  *     blank to use the existing content.
  * @param {?string} adsResponse The ads response to be requested when the
  *     content loads. Leave blank to use the existing ads response.
+ * @param {?boolean} playOnLoad True to play the content once it has loaded,
+ *     false to only load the content but not start playback.
  */
 Controller.prototype.setContentWithAdsResponse =
-    function(contentSrc, adsResponse) {
+    function(contentSrc, adsResponse, playOnLoad) {
   this.reset();
   this.settings.adsResponse =
       adsResponse ? adsResponse : this.settings.adsResponse;
-  this.playerWrapper.changeSource(contentSrc);
+  this.playerWrapper.changeSource(contentSrc, playOnLoad);
 };
 
 /**
@@ -569,13 +573,15 @@ Controller.prototype.setContentWithAdsResponse =
  *     blank to use the existing content.
  * @param {?Object} adsRequest The ads request to be requested when the
  *     content loads. Leave blank to use the existing ads request.
+ * @param {?boolean} playOnLoad True to play the content once it has loaded,
+ *     false to only load the content but not start playback.
  */
 Controller.prototype.setContentWithAdsRequest =
-    function(contentSrc, adsRequest) {
+    function(contentSrc, adsRequest, playOnLoad) {
   this.reset();
   this.settings.adsRequest =
       adsRequest ? adsRequest : this.settings.adsRequest;
-  this.playerWrapper.changeSource(contentSrc);
+  this.playerWrapper.changeSource(contentSrc, playOnLoad);
 };
 
 
@@ -585,7 +591,6 @@ Controller.prototype.setContentWithAdsRequest =
 Controller.prototype.reset = function() {
   this.sdkImpl.reset();
   this.playerWrapper.reset();
-  this.adUi.reset();
 };
 
 

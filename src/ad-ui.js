@@ -365,26 +365,10 @@ AdUi.prototype.showAdContainer = function() {
 
 
 /**
- * Hide the ad container
- */
-AdUi.prototype.hideAdContainer = function() {
-  this.adContainerDiv.style.display = 'none';
-};
-
-
-/**
- * Resets the state of the ad ui.
- */
-AdUi.prototype.reset = function() {
-  this.hideAdContainer();
-};
-
-
-/**
  * Handles ad errors.
  */
 AdUi.prototype.onAdError = function() {
-  this.hideAdContainer();
+  this.adContainerDiv.style.display = 'none';
 };
 
 
@@ -394,7 +378,7 @@ AdUi.prototype.onAdError = function() {
  * @param {Object} adEvent The event fired by the IMA SDK.
  */
 AdUi.prototype.onAdBreakStart = function(adEvent) {
-  this.showAdContainer();
+  this.adContainerDiv.style.display = 'block';
 
   const contentType = adEvent.getAd().getContentType();
   if ((contentType === 'application/javascript') &&
@@ -416,7 +400,7 @@ AdUi.prototype.onAdBreakEnd = function() {
   const currentAd = this.controller.getCurrentAd();
   if (currentAd == null || // hide for post-roll only playlist
       currentAd.isLinear()) { // don't hide for non-linear ads
-    this.hideAdContainer();
+    this.adContainerDiv.style.display = 'none';
   }
   this.controlsDiv.style.display = 'none';
   this.countdownDiv.innerHTML = '';
@@ -427,7 +411,7 @@ AdUi.prototype.onAdBreakEnd = function() {
  * Handles when all ads have finished playing.
  */
 AdUi.prototype.onAllAdsCompleted = function() {
-  this.hideAdContainer();
+  this.adContainerDiv.style.display = 'none';
 };
 
 
